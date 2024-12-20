@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply h-screen bg-gradient-to-b from-[#CDC7F1] to-[#FEF3F7] bg-no-repeat bg-cover;
+  }
+}
