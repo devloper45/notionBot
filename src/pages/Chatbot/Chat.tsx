@@ -1,7 +1,7 @@
 // adding chatcomponent
 
-import React, { useState, useRef, useEffect } from "react";
-import ChatComponent from "./chatComponent";
+import { useState } from "react";
+import ChatComponent from "./ChatComponent";
 
 interface Message {
   id: string;
@@ -37,26 +37,14 @@ export default function Chat() {
     try {
       // Construct request payload
 
-      let data = {
-        question: userMessage,
-        overrideConfig: {
-          weaviateIndex: "Hello4",
-        },
-      };
-
-      console.log("Sending data:", data);
-
-      const response = await fetch(
-        // "http://68.154.82.253:3000/api/v1/prediction/f5371f08-b6fc-4be6-a299-46fa2dc3afd4",
-        "http://68.154.82.253:3000/api/v1/prediction/47ffce7d-9310-4cd9-9713-d466d51bd58f",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const formData = new FormData();
+      formData.append("question", userMessage);
+      
+      const response = await fetch("http://64.225.5.175:8000/ask-question/", {
+        method: "POST",
+        body: formData,
+      });
+      
 
       if (!response.ok) {
         throw new Error(`Server Error: ${response.statusText}`);
@@ -64,7 +52,7 @@ export default function Chat() {
 
       const result = await response.json();
 
-      // console.log("KBIndex from chat:", KBIndex);
+     
       console.log("API Response:", result);
 
       const botResponseText = result?.text;

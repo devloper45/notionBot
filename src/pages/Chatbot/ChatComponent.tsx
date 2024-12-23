@@ -21,7 +21,7 @@ interface ChatComponentProps {
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  
+
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
 }
 const ChatComponent: FC<ChatComponentProps> = ({
@@ -39,7 +39,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
   loading,
   setInputValue,
 }) => {
-  const messagesContainerRef = useRef(null);
+  const messagesContainerRef: any = useRef(null);
 
   const handlebottemplate = (svalue: string) => {
     const userMessage = { text: svalue, sender: "user" };
@@ -73,7 +73,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
           <div className=" w-full flex justify-center ">
             <div className="flex flex-col  sm:mx-20 w-3/4   top-20 justify-center items-center h-[calc(100vh-16rem)]">
               <div className=" m-3 mb-5">
-                <span>Hi , there</span>
+                <span>Hi , there 👋</span>
                 {/* <img src={Logo} alt="" srcset="" className="w-10" /> */}
               </div>
               <p className="text-White font-bold  text-[1rem] mb-1 text-center sm:text-2xl">
