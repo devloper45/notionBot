@@ -1,7 +1,8 @@
 // adding chatcomponent
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChatComponent from "./ChatComponent";
+import toast from "react-hot-toast";
 
 interface Message {
   id: string;
@@ -14,10 +15,33 @@ export default function Chat() {
   const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useState("");
   const [loading, setLoading] = useState(false);
+  const [screenloading, setScreenLoading] = useState(false);
 
   const [welcomeMessage, setWelcomeMessage] = useState(
     "How can I help you today "
   );
+  const handleKnowledgeBaseReload = async () => {
+    setScreenLoading(true);
+    try {
+      const response = await fetch(
+        "http://64.225.5.175:8000/load-knowledge-base/",
+        { method: "POST" }
+      );
+      if (response.status === 200) {
+        setScreenLoading(false);
+      } else {
+        setScreenLoading(false);
+        toast("Unable to load Knowledge Base ");
+      }
+    } catch {
+      setScreenLoading(false);
+      toast("Unable to load Knowledge Base ");
+    }
+  };
+
+  useEffect(() => {
+    handleKnowledgeBaseReload();
+  }, []);
   //const dropdownRef = useRef();
 
   //useCloseRef(dropdownRef, setDropDown);
@@ -33,30 +57,28 @@ export default function Chat() {
       sendMessageToBot(userMessage.text);
     }
   };
+
   async function sendMessageToBot(userMessage: string) {
     try {
-      // Construct request payload
-
       const formData = new FormData();
       formData.append("question", userMessage);
-      
+
       const response = await fetch("http://64.225.5.175:8000/ask-question/", {
         method: "POST",
         body: formData,
       });
-      
-
-      if (!response.ok) {
-        throw new Error(`Server Error: ${response.statusText}`);
-      }
 
       const result = await response.json();
-
-     
       console.log("API Response:", result);
 
-      const botResponseText = result?.text;
-      const botMessage = { text: botResponseText, sender: "bot" };
+      const botResponseText = result?.payload?.answer;
+      const botQuestions = result?.payload?.questions || [];
+
+      const botMessage = {
+        text: botResponseText,
+        sender: "bot",
+        questions: botQuestions,
+      };
 
       setMessages((prevMessages: any) => [...prevMessages, botMessage]);
       setChatHistory(
@@ -70,27 +92,81 @@ export default function Chat() {
     }
   }
 
+  // async function sendMessageToBot(userMessage: string) {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("question", userMessage);
+
+  //     const response = await fetch("http://64.225.5.175:8000/ask-question/", {
+  //       method: "POST",
+  //       body: formData,
+  //     });
+
+  //     const result = await response.json();
+
+  //     console.log("API Response:", result);
+
+  //     const botResponseText = result?.payload?.answer;
+  //     console.log(result.payload);
+  //     const botMessage = { text: botResponseText, sender: "bot" };
+
+  //     setMessages((prevMessages: any) => [...prevMessages, botMessage]);
+  //     setChatHistory(
+  //       (prevChatHistory) => `${prevChatHistory}bot: ${botResponseText}\n`
+  //     );
+
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error("Error while sending message to bot:", error);
+  //     setLoading(false);
+  //   }
+  // }
+
   const sample1 = "Add Any text";
   const sample2 = "Add any question .";
   const sample3 = "Generate a Report";
 
-  const handleFetchFiles = async () => {
-    try {
-      const response = await fetch("http://68.154.82.253:3000/api");
-      console.log(response);
-    } catch (error) {}
-  };
+  // const handleFetchFiles = async () => {
+  //   // try {
+  //   //   const response = await fetch("http://68.154.82.253:3000/api");
+  //   //   console.log(response);
+  //   // } catch (error) {}
+  // };
 
+  const handleSubQueryChat = async (text: string) => {
+    console.log(text);
+  };
   return (
-    <div className="flex w-full h-full flex-col  bg-gradient-to-b from-[#CDC7F1] to-[#FEF3F7]  ">
+    <div className="flex w-full h-full flex-col relative  bg-gradient-to-b from-[#CDC7F1] to-[#FEF3F7]  ">
+      {screenloading && (
+        <div className=" bg-black/60 w-full h-screen absolute flex justify-center items-center ">
+          <div className=" flex text-white ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-8 animate-spin text-white"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+              />
+            </svg>
+            <span className=" ml-2 mt-1 animate-pulse">Loading ...</span>
+          </div>
+        </div>
+      )}
       <header className="flex justify-between items-center px-4 py-3 border-b border-gray-200">
         <div className="px-6 pt-2 pb-1 text-xl md:text-3xl flex justify-center items-center">
           <h3 className="text-White text-center  mb-1 font-bold">SciRAG</h3>
         </div>
 
         <button
-          className="px-4 py-2 bg-white border border-gray-200 rounded-md hover:bg-gray-50 flex items-center gap-2 text-sm"
-          onClick={handleFetchFiles}
+          className="px-4 py-2 bg-white border shadow-lg border-gray-200 rounded-md hover:bg-gray-50 flex items-center gap-2 text-sm"
+          onClick={() => handleKnowledgeBaseReload()}
         >
           <div>
             <svg
@@ -120,7 +196,7 @@ export default function Chat() {
               </defs>
             </svg>
           </div>
-          <span>Fetch files</span>
+          <span className="font-semibold">Reload </span>
         </button>
       </header>
       <div className="flex  justify-center top-9 items-center w-full h-[calc(100vh-6rem)]  bg-secondaryGrey300  ">
@@ -146,6 +222,7 @@ export default function Chat() {
                   loading={loading}
                   setLoading={setLoading}
                   setInputValue={setInputValue}
+                  handleSubQueryChat={handleSubQueryChat}
                 />
 
                 <div className="flex   mt-1 w-full  justify-center  ">

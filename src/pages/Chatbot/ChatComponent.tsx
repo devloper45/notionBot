@@ -15,6 +15,7 @@ interface ChatComponentProps {
   setWelcomeMessage: React.Dispatch<React.SetStateAction<string>>;
   welcomeMessage: string;
   sendMessageToBot: (userMessage: string) => void;
+  handleSubQueryChat: (text: string) => void;
   chatHistory: string;
   setChatHistory: React.Dispatch<React.SetStateAction<string>>;
   messages: Message[];
@@ -24,6 +25,25 @@ interface ChatComponentProps {
 
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
 }
+// interface subQuery {
+//   text: string;
+//   id: string;
+// }
+
+// const subQuery = [
+//   {
+//     id: "1",
+//     text: "Hello, how are you?",
+//   },
+//   {
+//     id: "2",
+//     text: "I'm good, thanks for asking!",
+//   },
+//   {
+//     id: "3",
+//     text: "What's your name?",
+//   },
+// ];
 const ChatComponent: FC<ChatComponentProps> = ({
   sample1,
   sample2,
@@ -38,6 +58,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
   setMessages,
   loading,
   setInputValue,
+  // handleSubQueryChat,
 }) => {
   const messagesContainerRef: any = useRef(null);
 
@@ -156,34 +177,60 @@ const ChatComponent: FC<ChatComponentProps> = ({
         <div className="   w-full flex justify-center">
           <div className="w-4/5">
             {messages.map((msg: any, index: any) => (
-              <div key={index} className="flex">
-                {msg.sender !== "user" && (
-                  <div className=" mr-2">
-                    <div className="rounded-full bg-slate-200 bg-opacity-85 mr-0.5 h-6 w-6 sm:h-10 sm:w-10 flex justify-center items-center">
-                      <FaRobot size={30} />
+              <>
+                <div key={index} className="flex">
+                  {msg.sender !== "user" && (
+                    <div className=" mr-2">
+                      <div className="rounded-full mt-2 bg-white bg-opacity-85 mr-0.5 h-7 w-7 sm:h-10 sm:w-10 flex justify-center items-center">
+                        <FaRobot size={30} />
+                      </div>
+                    </div>
+                  )}
+                  <div
+                    className={` p-2  rounded-lg whitespace-pre-wrap text-[#111C36] text-xs sm:text-sm  ${
+                      msg.sender === "user"
+                        ? " !text-white   ml-auto"
+                        : "  mr-auto ml-1"
+                    }`}
+                  >
+                    {msg.sender !== "user" && msg.questions?.length > 0 && (
+                      <ul className="list-disc list-inside text-gray-600 mb-2 flex  flex-wrap  text-sm">
+                        {msg.questions.map(
+                          (question: string, qIndex: number) => (
+                            <li
+                              className="flex border cursor-pointer  rounded-md border-gray-400 px-2  m-1"
+                              key={qIndex}
+                            >
+                              {question}
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    )}
+
+                    <div
+                      key={index}
+                      className={`mb-2 p-2  rounded-lg whitespace-pre-wrap text-[#111C36] text-xs sm:text-sm  ${
+                        msg.sender === "user"
+                          ? "bg-[#1A231E] !text-white outline outline-[#608673] outline-1  ml-auto"
+                          : "bg-white border-slate-300  mr-auto ml-1"
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center  ">
+                          <span className=" ">{msg.text}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                )}
-
-                <div
-                  key={index}
-                  className={`mb-2 p-2  rounded-lg whitespace-pre-wrap text-[#111C36] text-xs sm:text-sm  ${
-                    msg.sender === "user"
-                      ? "bg-[#1A231E] !text-white outline outline-[#608673] outline-1  ml-auto"
-                      : "bg-slate-200 border-slate-300  mr-auto ml-1"
-                  }`}
-                >
-                  <div className="flex items-center justify-center ">
-                    <span>{msg.text}</span>
-                  </div>
                 </div>
-              </div>
+              </>
             ))}
           </div>
         </div>
         {loading && (
           <div className="animate-pulse w-full flex justify-center space-x-4">
-            <div className="w-3/5 flex space-x-4">
+            <div className="w-4/5 flex space-x-4">
               {" "}
               <div className="rounded-full bg-slate-100 h-10 w-10"></div>
               <div className="flex-1 space-y-6 py-1">
