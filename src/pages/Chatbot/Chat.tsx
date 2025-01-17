@@ -42,9 +42,7 @@ export default function Chat() {
   useEffect(() => {
     handleKnowledgeBaseReload();
   }, []);
-  //const dropdownRef = useRef();
 
-  //useCloseRef(dropdownRef, setDropDown);
 
   const handleSendMessage = async () => {
     if (inputValue.trim() !== "") {
@@ -70,6 +68,7 @@ export default function Chat() {
 
       const result = await response.json();
       console.log("API Response:", result);
+      setWelcomeMessage("");
 
       const botResponseText = result?.payload?.answer;
       const botQuestions = result?.payload?.questions || [];
@@ -92,50 +91,13 @@ export default function Chat() {
     }
   }
 
-  // async function sendMessageToBot(userMessage: string) {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("question", userMessage);
-
-  //     const response = await fetch("http://64.225.5.175:8000/ask-question/", {
-  //       method: "POST",
-  //       body: formData,
-  //     });
-
-  //     const result = await response.json();
-
-  //     console.log("API Response:", result);
-
-  //     const botResponseText = result?.payload?.answer;
-  //     console.log(result.payload);
-  //     const botMessage = { text: botResponseText, sender: "bot" };
-
-  //     setMessages((prevMessages: any) => [...prevMessages, botMessage]);
-  //     setChatHistory(
-  //       (prevChatHistory) => `${prevChatHistory}bot: ${botResponseText}\n`
-  //     );
-
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error("Error while sending message to bot:", error);
-  //     setLoading(false);
-  //   }
-  // }
+ 
 
   const sample1 = "Add Any text";
   const sample2 = "Add any question .";
   const sample3 = "Generate a Report";
 
-  // const handleFetchFiles = async () => {
-  //   // try {
-  //   //   const response = await fetch("http://68.154.82.253:3000/api");
-  //   //   console.log(response);
-  //   // } catch (error) {}
-  // };
 
-  const handleSubQueryChat = async (text: string) => {
-    console.log(text);
-  };
   return (
     <div className="flex w-full h-full flex-col relative  bg-gradient-to-b from-[#CDC7F1] to-[#FEF3F7]  ">
       {screenloading && (
@@ -159,7 +121,7 @@ export default function Chat() {
           </div>
         </div>
       )}
-      <header className="flex justify-between items-center px-4 py-3 border-b border-gray-200">
+      <header className="flex justify-between items-center px-2 md:px-4 py-2 md:py-3 border-b border-gray-200">
         <div className="px-6 pt-2 pb-1 text-xl md:text-3xl flex justify-center items-center">
           <h3 className="text-White text-center  mb-1 font-bold">SciRAG</h3>
         </div>
@@ -213,22 +175,18 @@ export default function Chat() {
                   sample3={sample3}
                   sample2={sample2}
                   welcomeMessage={welcomeMessage}
-                  setWelcomeMessage={setWelcomeMessage}
-                  sendMessageToBot={sendMessageToBot}
-                  messages={messages}
-                  setMessages={setMessages}
-                  chatHistory={chatHistory}
-                  setChatHistory={setChatHistory}
+                  messages={messages}     
                   loading={loading}
                   setLoading={setLoading}
-                  setInputValue={setInputValue}
-                  handleSubQueryChat={handleSubQueryChat}
+                  setInputValue={setInputValue}             
                 />
 
                 <div className="flex   mt-1 w-full  justify-center  ">
                   <div
                     className={`flex bg-white mt-2 ${
-                      messages?.length === 0 ? "w-3/6" : "w-3/5"
+                      messages?.length === 0
+                        ? "md:w-3/6 w-5/6 "
+                        : "md:w-3/5 w-5/6"
                     } justify-center mb-8 py-2 rounded-2xl border border-secondaryGrey500 shadow-md`}
                   >
                     <input
@@ -236,7 +194,7 @@ export default function Chat() {
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       placeholder="Write Query to Chat ..."
-                      className="w-full pl-2 py-1 sm:py-2 bg-White border-none rounded-l-3xl focus:outline-none  text-sm !outline-none text-wrap"
+                      className="w-full ml-2 pl-2 py-1 sm:py-2 bg-White border-none rounded-l-3xl focus:outline-none  text-sm !outline-none text-wrap"
                       onKeyDown={(e) =>
                         e.key === "Enter" && handleSendMessage()
                       }

@@ -1,7 +1,6 @@
-// purpose : to show messages in all chatbot components
-
 import React, { useRef, useEffect, FC } from "react";
 import { FaRobot } from "react-icons/fa";
+import ReactMarkdown from "react-markdown";
 interface Message {
   id: string;
   text: string;
@@ -12,66 +11,29 @@ interface ChatComponentProps {
   sample1: string;
   sample2: string;
   sample3: string;
-  setWelcomeMessage: React.Dispatch<React.SetStateAction<string>>;
-  welcomeMessage: string;
-  sendMessageToBot: (userMessage: string) => void;
-  handleSubQueryChat: (text: string) => void;
-  chatHistory: string;
-  setChatHistory: React.Dispatch<React.SetStateAction<string>>;
+   welcomeMessage: string;
   messages: Message[];
-  setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
 }
-// interface subQuery {
-//   text: string;
-//   id: string;
-// }
 
-// const subQuery = [
-//   {
-//     id: "1",
-//     text: "Hello, how are you?",
-//   },
-//   {
-//     id: "2",
-//     text: "I'm good, thanks for asking!",
-//   },
-//   {
-//     id: "3",
-//     text: "What's your name?",
-//   },
-// ];
+
+
 const ChatComponent: FC<ChatComponentProps> = ({
   sample1,
   sample2,
   sample3,
-  setWelcomeMessage,
   welcomeMessage,
-  // handlebottemplate,
-  sendMessageToBot,
-  chatHistory,
-  setChatHistory,
   messages,
-  setMessages,
   loading,
   setInputValue,
-  // handleSubQueryChat,
 }) => {
   const messagesContainerRef: any = useRef(null);
 
   const handlebottemplate = (svalue: string) => {
-    const userMessage = { text: svalue, sender: "user" };
-    //console.log(svalue);
-    const updatedChatHistory = `${chatHistory}user: ${svalue}\n`;
-    setMessages((prevMessages: any) => [...prevMessages, userMessage]);
-
-    setChatHistory(updatedChatHistory);
-    setInputValue("");
-    setWelcomeMessage("");
-    sendMessageToBot(userMessage.text);
+    setInputValue(svalue);
   };
 
   const scrollToBottom = () => {
@@ -92,23 +54,23 @@ const ChatComponent: FC<ChatComponentProps> = ({
       >
         {messages?.length === 0 && welcomeMessage && (
           <div className=" w-full flex justify-center ">
-            <div className="flex flex-col  sm:mx-20 w-3/4   top-20 justify-center items-center h-[calc(100vh-16rem)]">
+            <div className="flex flex-col  sm:mx-20 md:w-3/4  w-11/12  top-20 justify-center items-center h-[calc(100vh-16rem)]">
               <div className=" m-3 mb-5">
                 <span>Hi , there 👋</span>
-                {/* <img src={Logo} alt="" srcset="" className="w-10" /> */}
+                
               </div>
               <p className="text-White font-bold  text-[1rem] mb-1 text-center sm:text-2xl">
                 {welcomeMessage}?
               </p>
-              <p className=" text-xs sm:text-[1rem] leading-relaxed w-4/6   m-4 text-gray-500 text-center">
+              <p className=" text-xs sm:text-[1rem] leading-relaxed md:w-4/6 w-10/12  m-4 text-gray-500 text-center">
                 This code will display a prompt asking the user for their name,
                 and then it will display a greeting message with the name
                 entered by the user.
               </p>
-              <div className=" grid sm:grid-cols-2 md:grid-cols-3 text-gray-600 justify-around text-2xl mt-11 w-4/6 gap-2 text-gray ">
+              <div className=" grid sm:grid-cols-2 md:grid-cols-3 text-gray-600 justify-around text-2xl mt-2 md:mt-11 w-11/12 md:w-4/6 gap-2 text-gray ">
                 <div
                   onClick={() => handlebottemplate(sample1)}
-                  className="flex flex-col text-xs sm:text-sm items-center border bg-white border-[#C1C1C1]  rounded-2xl hover:bg-secondaryGrey500 py-4  p-2 m-2 my-4 bg-opacity-50 text-White text-center cursor-pointer"
+                  className="flex flex-col text-xs sm:text-sm items-center border bg-white border-[#C1C1C1]  rounded-2xl hover:bg-[#e9e8e8] md:py-4  p-2  md:m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +113,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                 </div>
                 <div
                   onClick={() => handlebottemplate(sample3)}
-                  className="flex border flex-col items-center   bg-white border-[#C1C1C1] py-4  rounded-2xl hover:bg-secondaryGrey500  text-sm    p-2 m-2 my-4 bg-opacity-50 text-White text-center cursor-pointer"
+                  className="flex border flex-col items-center   bg-white border-[#C1C1C1]  rounded-2xl hover:bg-secondaryGrey500  text-sm    md:py-4  p-2  md:m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +121,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="size-8 m-1"
+                    className="size-6 md:size-8 m-1"
                   >
                     <path
                       strokeLinecap="round"
@@ -175,7 +137,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
           </div>
         )}
         <div className="   w-full flex justify-center">
-          <div className="w-4/5">
+          <div className="w-11/12 md:w-4/5">
             {messages.map((msg: any, index: any) => (
               <>
                 <div key={index} className="flex">
@@ -195,15 +157,22 @@ const ChatComponent: FC<ChatComponentProps> = ({
                   >
                     {msg.sender !== "user" && msg.questions?.length > 0 && (
                       <ul className="list-disc list-inside text-gray-600 mb-2 flex  flex-wrap  text-sm">
+                       
                         {msg.questions.map(
-                          (question: string, qIndex: number) => (
-                            <li
-                              className="flex border cursor-pointer  rounded-md border-gray-400 px-2  m-1"
-                              key={qIndex}
-                            >
-                              {question}
-                            </li>
-                          )
+                          (question: string, qIndex: number) => {
+                            const formattedQuestion = question.startsWith("-")
+                              ? question.slice(1).trim()
+                              : question;
+
+                            return (
+                              <li
+                                className="flex border cursor-pointer rounded-md border-gray-400 px-2 m-1"
+                                key={qIndex}
+                              >
+                                {formattedQuestion}
+                              </li>
+                            );
+                          }
                         )}
                       </ul>
                     )}
@@ -217,8 +186,49 @@ const ChatComponent: FC<ChatComponentProps> = ({
                       }`}
                     >
                       <div>
-                        <div className="flex items-center  ">
-                          <span className=" ">{msg.text}</span>
+                        <div className="flex flex-col justify-center  ">
+                          <ReactMarkdown
+                            components={{
+                              // Custom rendering for headings
+                              h1: ({ node, ...props }) => (
+                                <h1
+                                  className="text-lg sm:text-2xl font-bold my-4"
+                                  {...props}
+                                />
+                              ),
+                              h2: ({ node, ...props }) => (
+                                <h2
+                                  className="text-[16px] sm:text-xl font-bold "
+                                  {...props}
+                                />
+                              ),
+                              h3: ({ node, ...props }) => (
+                                <h3
+                                  className=" text-base sm:text-lg font-semibold "
+                                  {...props}
+                                />
+                              ),
+                              // Custom rendering for lists
+                              ul: ({ node, ...props }) => (
+                                <ul
+                                  className="list-disc list-inside ml-1 sm:ml-3"
+                                  {...props}
+                                />
+                              ),
+                              li: ({ node, ...props }) => (
+                                <li className="mb-1" {...props} />
+                              ),
+                              // Custom rendering for paragraphs
+                              p: ({ node, ...props }) => (
+                                <p
+                                  className=" text-sm sm:text-base"
+                                  {...props}
+                                />
+                              ),
+                            }}
+                          >
+                            {msg.text}
+                          </ReactMarkdown>
                         </div>
                       </div>
                     </div>
@@ -230,9 +240,9 @@ const ChatComponent: FC<ChatComponentProps> = ({
         </div>
         {loading && (
           <div className="animate-pulse w-full flex justify-center space-x-4">
-            <div className="w-4/5 flex space-x-4">
+            <div className="w-11/12 md:w-4/5 flex space-x-4">
               {" "}
-              <div className="rounded-full bg-slate-100 h-10 w-10"></div>
+              <div className="rounded-full mt-1 bg-slate-100 h-10 w-10"></div>
               <div className="flex-1 space-y-6 py-1">
                 <div className="h-2 bg-slate-100 rounded"></div>
                 <div className="space-y-3">
