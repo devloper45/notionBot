@@ -26,18 +26,24 @@ export const ReloadModal: React.FC<ReloadModalProps> = ({
 }) => {
   return (
     <div className=" bg-black/60 w-full h-screen absolute flex justify-center items-center ">
-      <div className="  bg-white w-11/12 md:w-2/6 min-h-[100px] relative rounded-xl p-4">
-        <div
-          className="absolute top-4 right-4 cursor-pointer hover:scale-125"
-          onClick={() => {
-            setScreenLoading(false);
-            setKnowledgeBaseApiLoading("none");
-            setProcessApiLoading("none");
-            setReloadApiLoading("none");
-          }}
-        >
-          <IoIosCloseCircle className="text-red-600 mr-2 h-5 w-5" />
-        </div>
+      <div className="  bg-white w-11/12 sm:w-3/6 md:w-2/6  min-h-[100px] relative rounded-xl p-4">
+        {knowledgeBaseApiLoading === "error" ||
+        reloadApiLoading === "error" ||
+        processApiLoading === "error" ? (
+          <div
+            className="absolute top-4 right-1 sm:right-2 md:right-4 cursor-pointer hover:scale-125"
+            onClick={() => {
+              setScreenLoading(false);
+              setKnowledgeBaseApiLoading("none");
+              setProcessApiLoading("none");
+              setReloadApiLoading("none");
+            }}
+          >
+            <IoIosCloseCircle className="text-red-600 sm:mr-2 h-5 w-5" />
+          </div>
+        ) : (
+          ""
+        )}
         <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
           Downloading and Fetching new files:
         </h2>
@@ -189,6 +195,15 @@ export const ReloadModal: React.FC<ReloadModalProps> = ({
             >
               Reload
             </button>
+          </div>
+        ) : (
+          ""
+        )}
+        {reloadApiLoading === "loading" ||
+        knowledgeBaseApiLoading === "loading" ||
+        processApiLoading === "loading" ? (
+          <div className=" text-center text-sm mt-2 text-gray-950">
+            Please wait, It may take a some time{" "}
           </div>
         ) : (
           ""

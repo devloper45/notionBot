@@ -11,15 +11,13 @@ interface ChatComponentProps {
   sample1: string;
   sample2: string;
   sample3: string;
-   welcomeMessage: string;
+  welcomeMessage: string;
   messages: Message[];
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
 }
-
-
 
 const ChatComponent: FC<ChatComponentProps> = ({
   sample1,
@@ -57,41 +55,20 @@ const ChatComponent: FC<ChatComponentProps> = ({
             <div className="flex flex-col  sm:mx-20 md:w-3/4  w-11/12  top-20 justify-center items-center h-[calc(100vh-16rem)]">
               <div className=" m-3 mb-5">
                 <span>Hi , there 👋</span>
-                
               </div>
               <p className="text-White font-bold  text-[1rem] mb-1 text-center sm:text-2xl">
                 {welcomeMessage}?
               </p>
-              <p className=" text-xs sm:text-[1rem] leading-relaxed md:w-4/6 w-10/12  m-4 text-gray-500 text-center">
+              <p className=" text-xs sm:text-[1rem] leading-relaxed md:w-5/6 lg:4/6 w-10/12  m-4 text-gray-500 text-center">
                 This code will display a prompt asking the user for their name,
                 and then it will display a greeting message with the name
                 entered by the user.
               </p>
               <div className=" grid sm:grid-cols-2 md:grid-cols-3 text-gray-600 justify-around text-2xl mt-2 md:mt-11 w-11/12 md:w-4/6 gap-2 text-gray ">
-                <div
-                  onClick={() => handlebottemplate(sample1)}
-                  className="flex flex-col text-xs sm:text-sm items-center border bg-white border-[#C1C1C1]  rounded-2xl hover:bg-[#e9e8e8] md:py-4  p-2  md:m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-6 sm:size-7 m-1"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      strokeLinejoin="round"
-                      d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
-                    />
-                  </svg>
-                  <h1 className=" m-1">{sample1}</h1>
-                </div>
-                <div className=" hidden sm:block">
+                <div>
                   <div
-                    onClick={() => handlebottemplate(sample2)}
-                    className="flex flex-col items-center border text-sm  bg-white border-[#C1C1C1] py-4  rounded-2xl hover:bg-secondaryGrey500  p-2 m-2 my-4 bg-opacity-50 text-White  cursor-pointer"
+                    onClick={() => handlebottemplate(sample1)}
+                    className="flex flex-col text-xs sm:text-sm items-center border bg-white border-[#C1C1C1]  rounded-2xl hover:bg-[#e9e8e8] sm:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +76,29 @@ const ChatComponent: FC<ChatComponentProps> = ({
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="size-8 m-1"
+                      className="size-6 sm:size-7 m-1"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        strokeLinejoin="round"
+                        d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
+                      />
+                    </svg>
+                    <h1 className=" m-1">{sample1}</h1>
+                  </div>
+                </div>
+                <div className=" hidden sm:block ">
+                  <div
+                    onClick={() => handlebottemplate(sample2)}
+                    className="flex flex-col items-center border text-sm  bg-white border-[#C1C1C1] sm:py-4  rounded-2xl hover:bg-secondaryGrey500  p-2 m-2 md:my-4 bg-opacity-50 text-White  cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-6 sm:size-7 m-1"
                     >
                       <path
                         stroke-linecap="round"
@@ -108,29 +107,31 @@ const ChatComponent: FC<ChatComponentProps> = ({
                       />
                     </svg>
 
-                    <h1 className=" m-1">{sample2}</h1>
+                    <h1 className=" m-1 text-center ">{sample2}</h1>
                   </div>
                 </div>
-                <div
-                  onClick={() => handlebottemplate(sample3)}
-                  className="flex border flex-col items-center   bg-white border-[#C1C1C1]  rounded-2xl hover:bg-secondaryGrey500  text-sm    md:py-4  p-2  md:m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6 md:size-8 m-1"
+                <div className="sm:col-span-2 md:col-span-1">
+                  <div
+                    onClick={() => handlebottemplate(sample3)}
+                    className="flex border flex-col items-center    bg-white border-[#C1C1C1]  rounded-2xl hover:bg-secondaryGrey500  text-sm    md:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-                    />
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6 sm:size-7 m-1"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                      />
+                    </svg>
 
-                  <h1 className=" m-1">{sample3}</h1>
+                    <h1 className=" m-1">{sample3}</h1>
+                  </div>
                 </div>
               </div>
             </div>
@@ -157,7 +158,6 @@ const ChatComponent: FC<ChatComponentProps> = ({
                   >
                     {msg.sender !== "user" && msg.questions?.length > 0 && (
                       <ul className="list-disc list-inside text-gray-600 mb-2 flex  flex-wrap  text-sm">
-                       
                         {msg.questions.map(
                           (question: string, qIndex: number) => {
                             const formattedQuestion = question.startsWith("-")

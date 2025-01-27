@@ -1,6 +1,6 @@
 // adding chatcomponent
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChatComponent from "./ChatComponent";
 import toast from "react-hot-toast";
 import { Api } from "../../util/utils";
@@ -207,8 +207,8 @@ export default function Chat() {
                   <div
                     className={`flex bg-white mt-2 ${
                       messages?.length === 0
-                        ? "md:w-3/6 w-5/6 "
-                        : "md:w-3/5 w-5/6"
+                        ? "sm:w-4/6 lg:w-3/6 w-5/6 "
+                        : "sm:w-4/6 lg:w-3/5 w-5/6"
                     } justify-center mb-8 py-2 rounded-2xl border border-secondaryGrey500 shadow-md`}
                   >
                     <input
