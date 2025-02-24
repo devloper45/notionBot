@@ -1,6 +1,6 @@
 // adding chatcomponent
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import ChatComponent from "./ChatComponent";
 import toast from "react-hot-toast";
 import { Api } from "../../util/utils";
@@ -32,6 +32,12 @@ export default function Chat() {
   const [welcomeMessage, setWelcomeMessage] = useState(
     "How can I help you today "
   );
+
+  useEffect(() => {
+    
+    handleKnowledgeBaseReload();
+  }, []);
+
   const handleKnowledgeBaseReload = async () => {
     // setScreenLoading(true);
     setKnowledgeBaseApiLoading("loading");
@@ -153,6 +159,13 @@ export default function Chat() {
     }
   };
 
+  const handleNewChat = () => {
+    setWelcomeMessage("How can I help you today ");
+    setMessages([]);
+    setChatHistory("");
+    setInputValue("");
+  };
+
   return (
     <div className="flex w-full h-full flex-col relative  bg-gradient-to-b from-[#CDC7F1] to-[#FEF3F7]  ">
       {screenloading && (
@@ -170,7 +183,12 @@ export default function Chat() {
 
       <header className="flex justify-between items-center px-2 md:px-4 py-2 md:py-3 border-b border-gray-200">
         <div className="px-6 pt-2 pb-1 text-xl md:text-3xl flex justify-center items-center">
-          <h3 className="text-White text-center  mb-1 font-bold">SciRAG</h3>
+          <h3
+            onClick={handleNewChat}
+            className="text-White text-center cursor-pointer mb-1 font-bold"
+          >
+            SciRAG
+          </h3>
         </div>
 
         <button

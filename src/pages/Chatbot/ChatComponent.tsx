@@ -68,7 +68,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                 <div>
                   <div
                     onClick={() => handlebottemplate(sample1)}
-                    className="flex flex-col text-xs sm:text-sm items-center border bg-white border-[#C1C1C1]  rounded-2xl hover:bg-[#e9e8e8] hover:scale-110  sm:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
+                    className="flex flex-col text-xs sm:text-sm items-center hover:shadow-lg shadow-sm border bg-white border-[#C1C1C1]  rounded-2xl hover:bg-[#e9e8e8] hover:scale-110  sm:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +90,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                 <div className=" hidden sm:block ">
                   <div
                     onClick={() => handlebottemplate(sample2)}
-                    className="flex flex-col items-center border text-sm  bg-white border-[#C1C1C1] sm:py-4  rounded-2xl hover:scale-110  p-2 m-2 md:my-4 bg-opacity-50 text-White  cursor-pointer"
+                    className="flex flex-col items-center border text-sm shadow-sm hover:shadow-lg bg-white border-[#C1C1C1] sm:py-4  rounded-2xl hover:scale-110  p-2 m-2 md:my-4 bg-opacity-50 text-White  cursor-pointer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                 <div className="sm:col-span-2 md:col-span-1">
                   <div
                     onClick={() => handlebottemplate(sample3)}
-                    className="flex border flex-col items-center    bg-white border-[#C1C1C1]  rounded-2xl hover:scale-110   text-sm    md:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
+                    className="flex border flex-col items-center shadow-sm hover:shadow-lg    bg-white border-[#C1C1C1]  rounded-2xl hover:scale-110   text-sm    md:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
