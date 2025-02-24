@@ -44,15 +44,15 @@ export const ReloadModal: React.FC<ReloadModalProps> = ({
         ) : (
           ""
         )}
-        <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+        <h2 className="mb-2 text-lg font-semibold text-gray-900 ">
           Downloading and Fetching new files:
         </h2>
-        <ul className="max-w-md space-y-2 text-gray-500 list-inside dark:text-gray-400">
+        <ul className="max-w-md space-y-2 text-gray-500 list-inside ">
           <li className="flex items-center">
             {reloadApiLoading === "loading" ? (
               <svg
                 aria-hidden="true"
-                className="w-4 h-4 me-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                className="w-4 h-4 me-2 text-gray-200 animate-spin  fill-blue-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ export const ReloadModal: React.FC<ReloadModalProps> = ({
               </svg>
             ) : reloadApiLoading === "success" ? (
               <svg
-                className="w-4 h-4 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+                className="w-4 h-4 me-2 text-green-500  flex-shrink-0"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -78,7 +78,7 @@ export const ReloadModal: React.FC<ReloadModalProps> = ({
               </svg>
             ) : reloadApiLoading === "updated" ? (
               <svg
-                className="w-4 h-4 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+                className="w-4 h-4 me-2 text-green-500  flex-shrink-0"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -101,7 +101,7 @@ export const ReloadModal: React.FC<ReloadModalProps> = ({
               {processApiLoading === "loading" ? (
                 <svg
                   aria-hidden="true"
-                  className="w-4 h-4 me-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  className="w-4 h-4 me-2 text-gray-200 animate-spin  fill-blue-600"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ export const ReloadModal: React.FC<ReloadModalProps> = ({
                 </svg>
               ) : processApiLoading === "success" ? (
                 <svg
-                  className="w-4 h-4 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+                  className="w-4 h-4 me-2 text-green-500  flex-shrink-0"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -138,7 +138,7 @@ export const ReloadModal: React.FC<ReloadModalProps> = ({
               {knowledgeBaseApiLoading === "loading" ? (
                 <svg
                   aria-hidden="true"
-                  className="w-4 h-4 me-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  className="w-4 h-4 me-2 text-gray-200 animate-spin  fill-blue-600"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@ export const ReloadModal: React.FC<ReloadModalProps> = ({
                 </svg>
               ) : knowledgeBaseApiLoading === "success" ? (
                 <svg
-                  className="w-4 h-4 me-2 text-green-500 dark:text-green-400 flex-shrink-0"
+                  className="w-4 h-4 me-2 text-green-500 flex-shrink-0"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"

@@ -59,7 +59,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
               <p className="text-White font-bold  text-[1rem] mb-1 text-center sm:text-2xl">
                 {welcomeMessage}?
               </p>
-              <p className=" text-xs sm:text-[1rem] leading-relaxed md:w-5/6 lg:4/6 w-10/12  m-4 text-gray-500 text-center">
+              <p className=" text-xs sm:text-[1rem] leading-relaxed md:w-4/6  w-10/12  m-4 text-gray-500 text-center">
                 This code will display a prompt asking the user for their name,
                 and then it will display a greeting message with the name
                 entered by the user.
@@ -68,7 +68,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                 <div>
                   <div
                     onClick={() => handlebottemplate(sample1)}
-                    className="flex flex-col text-xs sm:text-sm items-center border bg-white border-[#C1C1C1]  rounded-2xl hover:bg-[#e9e8e8] sm:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
+                    className="flex flex-col text-xs sm:text-sm items-center border bg-white border-[#C1C1C1]  rounded-2xl hover:bg-[#e9e8e8] hover:scale-110  sm:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +90,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                 <div className=" hidden sm:block ">
                   <div
                     onClick={() => handlebottemplate(sample2)}
-                    className="flex flex-col items-center border text-sm  bg-white border-[#C1C1C1] sm:py-4  rounded-2xl hover:bg-secondaryGrey500  p-2 m-2 md:my-4 bg-opacity-50 text-White  cursor-pointer"
+                    className="flex flex-col items-center border text-sm  bg-white border-[#C1C1C1] sm:py-4  rounded-2xl hover:scale-110  p-2 m-2 md:my-4 bg-opacity-50 text-White  cursor-pointer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                 <div className="sm:col-span-2 md:col-span-1">
                   <div
                     onClick={() => handlebottemplate(sample3)}
-                    className="flex border flex-col items-center    bg-white border-[#C1C1C1]  rounded-2xl hover:bg-secondaryGrey500  text-sm    md:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
+                    className="flex border flex-col items-center    bg-white border-[#C1C1C1]  rounded-2xl hover:scale-110   text-sm    md:py-4  p-2  m-2 md:my-4 bg-opacity-50 text-White text-center cursor-pointer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                               // Custom rendering for headings
                               h1: ({ node, ...props }) => (
                                 <h1
-                                  className="text-lg sm:text-2xl font-bold my-4"
+                                  className="text-lg sm:text-2xl font-bold my-2"
                                   {...props}
                                 />
                               ),
@@ -204,7 +204,7 @@ const ChatComponent: FC<ChatComponentProps> = ({
                               ),
                               h3: ({ node, ...props }) => (
                                 <h3
-                                  className=" text-base sm:text-lg font-semibold "
+                                  className=" text-base sm:text-lg font-bold "
                                   {...props}
                                 />
                               ),
