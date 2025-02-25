@@ -1,6 +1,6 @@
 // adding chatcomponent
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import ChatComponent from "./ChatComponent";
 import toast from "react-hot-toast";
 import { Api } from "../../util/utils";
@@ -34,7 +34,6 @@ export default function Chat() {
   );
 
   useEffect(() => {
-    
     handleKnowledgeBaseReload();
   }, []);
 
@@ -89,7 +88,11 @@ export default function Chat() {
       console.log("API Response:", result);
       setWelcomeMessage("");
 
-      const botResponseText = result?.payload?.answer;
+      const botResponseText = result?.payload?.answer.replace(
+        /\n\s*\n/g,
+        " \n "
+      );
+      console.log(botResponseText);
       const botQuestions = result?.payload?.questions || [];
 
       const botMessage = {

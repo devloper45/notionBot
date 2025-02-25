@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, FC } from "react";
 import { FaRobot } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm"; // Optional for GitHub-flavored markdown
+import remarkBreaks from "remark-breaks";
 interface Message {
   id: string;
   text: string;
@@ -186,42 +188,55 @@ const ChatComponent: FC<ChatComponentProps> = ({
                       }`}
                     >
                       <div>
-                        <div className="flex flex-col justify-center  ">
+                        <div className="flex flex-col justify-center px-2  ">
                           <ReactMarkdown
+                            remarkPlugins={[remarkGfm, remarkBreaks]}
                             components={{
                               // Custom rendering for headings
                               h1: ({ node, ...props }) => (
                                 <h1
-                                  className="text-lg sm:text-2xl font-bold my-2"
+                                  className="text-lg sm:text-2xl font-bold my-3"
                                   {...props}
                                 />
                               ),
                               h2: ({ node, ...props }) => (
                                 <h2
-                                  className="text-[16px] sm:text-xl font-bold "
+                                  className="text-[16px] sm:text-xl font-bold my-2 "
                                   {...props}
                                 />
                               ),
                               h3: ({ node, ...props }) => (
                                 <h3
-                                  className=" text-base sm:text-lg font-bold "
+                                  className=" text-base sm:text-lg font-bold  my-2"
+                                  {...props}
+                                />
+                              ),
+                              h4: ({ node, ...props }) => (
+                                <h4
+                                  className=" text-base sm:text-lg font-semibold  my-2"
                                   {...props}
                                 />
                               ),
                               // Custom rendering for lists
                               ul: ({ node, ...props }) => (
                                 <ul
-                                  className="list-disc list-inside ml-1 sm:ml-3"
+                                  className="list-disc list-inside ml-1 sm:ml-3 leading-[1rem]"
+                                  {...props}
+                                />
+                              ),
+                              ol: ({ node, ...props }) => (
+                                <ol
+                                  className="list-decimal list-inside ml-1 sm:ml-3 leading-none"
                                   {...props}
                                 />
                               ),
                               li: ({ node, ...props }) => (
-                                <li className="mb-1" {...props} />
+                                <li className="leading-normal " {...props} />
                               ),
                               // Custom rendering for paragraphs
                               p: ({ node, ...props }) => (
                                 <p
-                                  className=" text-sm sm:text-base"
+                                  className=" text-sm sm:text-base leading-3"
                                   {...props}
                                 />
                               ),
